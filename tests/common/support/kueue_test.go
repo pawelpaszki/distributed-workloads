@@ -65,7 +65,8 @@ func TestCreateKueueLocalQueue(t *testing.T) {
 	default_lq := CreateKueueLocalQueue(test, "ns-2", "cq-2", AsDefaultQueue)
 
 	test.Expect(default_lq).To(gomega.Not(gomega.BeNil()))
-	test.Expect(default_lq.GenerateName).To(gomega.Equal("lq-"))
+	test.Expect(default_lq.Name).To(gomega.Equal(KueueDefaultQueueName))
+	test.Expect(default_lq.GenerateName).To(gomega.BeEmpty())
 	test.Expect(default_lq.Annotations["kueue.x-k8s.io/default-queue"]).To(gomega.Equal("true"))
 	test.Expect(default_lq.Namespace).To(gomega.Equal("ns-2"))
 	test.Expect(default_lq.Spec.ClusterQueue).To(gomega.Equal(kueuev1beta2.ClusterQueueReference("cq-2")))

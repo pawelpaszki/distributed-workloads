@@ -74,6 +74,9 @@ var AsDefaultQueue = ErrorOption[*kueuev1beta2.LocalQueue](func(to *kueuev1beta2
 		to.Annotations = make(map[string]string)
 	}
 	to.Annotations["kueue.x-k8s.io/default-queue"] = "true"
+	// Notebook and workbench workloads label queue-name as "default" (see notebook.go).
+	to.Name = KueueDefaultQueueName
+	to.GenerateName = ""
 	return nil
 })
 
